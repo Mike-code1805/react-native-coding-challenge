@@ -1,16 +1,16 @@
 import React from "react";
-import { Text } from "react-native";
+import { Button, Text } from "react-native";
 import { Field } from "formik";
-import AppForm from "./components/AppForm";
-import AppFormField from "./components/AppFormField";
-import AppFormSubmitButton from "./components/AppFormSubmitButton";
+import AppForm from "./components/form/AppForm";
+import AppFormField from "./components/form/AppFormField";
+import AppFormSubmitButton from "./components/form/AppFormSubmitButton";
 import loginValidation from "./validator/loginValidation";
+import ButtonShared from "./components/button/ButtonShared";
 
-
-const Login = () => {
+const Login = ({ navigation }: any) => {
   return (
     <>
-      <Text>Sign Up</Text>
+      <Text>Login</Text>
       <AppForm
         initialValues={{
           name: "",
@@ -36,8 +36,13 @@ const Login = () => {
           secureTextEntry
           textContentType="password"
         />
-        <AppFormSubmitButton title="Submit" />
+        <AppFormSubmitButton title="Ingresar" />
       </AppForm>
+      <ButtonShared
+        title="Go to Register"
+        onPress={() => navigation.navigate("Register")}
+        isValid={true}
+      />
     </>
   );
 };

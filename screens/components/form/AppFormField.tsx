@@ -1,5 +1,26 @@
 import React from "react";
-import { Text, TextInput } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
+
+const styles = StyleSheet.create({
+  container: {
+    display: "flex",
+    padding: 5,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ddd",
+    padding: 10,
+    fontSize: 18,
+    borderRadius: 6,
+    fontFamily: "monospace",
+  },
+  errorText: {
+    color: "crimson",
+    fontWeight: "bold",
+    marginBottom: 10,
+    fontFamily: "monospace",
+  },
+});
 
 const AppFormField = (props: any) => {
   const {
@@ -11,8 +32,9 @@ const AppFormField = (props: any) => {
 
   const hasError = errors[name] && touched[name];
   return (
-    <>
+    <View style={styles.container}>
       <TextInput
+        style={styles.input}
         placeholder={placeholder}
         onChangeText={(text) => onChange(name)(text)}
         onBlur={() => {
@@ -24,8 +46,8 @@ const AppFormField = (props: any) => {
         value={value}
         {...inputProps}
       />
-      {hasError && <Text style={{ color: "red" }}>{errors[name]}</Text>}
-    </>
+      {hasError && <Text style={styles.errorText}>{errors[name]}</Text>}
+    </View>
   );
 };
 

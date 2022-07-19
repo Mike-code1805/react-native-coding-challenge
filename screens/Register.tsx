@@ -1,12 +1,13 @@
 import React from "react";
-import { Text } from "react-native";
+import { Button, Text } from "react-native";
 import { Field } from "formik";
-import AppForm from "./components/AppForm";
-import AppFormField from "./components/AppFormField";
-import AppFormSubmitButton from "./components/AppFormSubmitButton";
+import AppForm from "./components/form/AppForm";
+import AppFormField from "./components/form/AppFormField";
+import AppFormSubmitButton from "./components/form/AppFormSubmitButton";
 import registerValidation from "./validator/registerValidation";
+import ButtonShared from "./components/button/ButtonShared";
 
-const Register = () => {
+const Register = ({ navigation }: any) => {
   return (
     <>
       <Text>Sign Up</Text>
@@ -43,8 +44,13 @@ const Register = () => {
           secureTextEntry
           textContentType="password"
         />
-        <AppFormSubmitButton title="Submit" />
+        <AppFormSubmitButton title="Registrase" />
       </AppForm>
+      <ButtonShared
+        title="Go to Login"
+        onPress={() => navigation.navigate("Login")}
+        isValid={true}
+      />
     </>
   );
 };
