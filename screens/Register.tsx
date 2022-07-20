@@ -6,6 +6,9 @@ import AppFormField from "./components/form/AppFormField";
 import AppFormSubmitButton from "./components/form/AppFormSubmitButton";
 import registerValidation from "./validator/registerValidation";
 import ButtonShared from "./components/button/ButtonShared";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUsers } from "../redux/store";
+import { getUser, register } from "../redux/apiCall";
 
 const styles = StyleSheet.create({
   container: {
@@ -14,15 +17,27 @@ const styles = StyleSheet.create({
     paddingTop: 60,
     padding: 10,
   },
-  text:{
+  text: {
     textDecorationLine: "underline",
     fontWeight: "bold",
     fontFamily: "monospace",
     fontSize: 20,
-  }
+  },
 });
 
 const Register = ({ navigation }: any) => {
+  const state = useSelector(selectUsers);
+  const dispatch = useDispatch();
+
+  const handleOnSubmitToRegister = async (values: any) => {
+    await register(dispatch, values);
+    if (!state.error) {
+      try {
+        navigation.navigate("Pagination");
+      } catch (error) {}
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Registro:</Text>
@@ -34,7 +49,7 @@ const Register = ({ navigation }: any) => {
           confirmPassword: "",
         }}
         validationSchema={registerValidation}
-        onSubmit={(values: any) => console.log(values)}
+        onSubmit={handleOnSubmitToRegister}
       >
         <Field component={AppFormField} name="name" placeholder="Nombre" />
         <Field

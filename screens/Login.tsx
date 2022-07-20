@@ -6,7 +6,10 @@ import AppFormField from "./components/form/AppFormField";
 import AppFormSubmitButton from "./components/form/AppFormSubmitButton";
 import loginValidation from "./validator/loginValidation";
 import ButtonShared from "./components/button/ButtonShared";
-
+import { useDispatch, useSelector } from "react-redux";
+import { selectUsers } from "../redux/store";
+import { register } from "../redux/apiCall";
+import { StackActions } from "@react-navigation/native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -14,26 +17,39 @@ const styles = StyleSheet.create({
     paddingTop: 60,
     padding: 10,
   },
-  text:{
+  text: {
     textDecorationLine: "underline",
     fontWeight: "bold",
     fontFamily: "monospace",
     fontSize: 20,
-  }
+  },
 });
 const Login = ({ navigation }: any) => {
+  const state = useSelector(selectUsers);
+  const dispatch = useDispatch();
+
+  const handleOnSubmitToLogin = async (values: any) => {
+    await register(dispatch, values);
+    if (!state.error) {
+      try {
+        navigation.dispatch(StackActions.replace("Pagination", state.user));
+      } catch (error) {}
+    }
+  };
+
+  const handleOnGoSubmit = () => {
+    navigation.navigate("Register");
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Login:</Text>
       <AppForm
         initialValues={{
-          name: "",
           email: "",
           password: "",
-          confirmPassword: "",
         }}
         validationSchema={loginValidation}
-        onSubmit={(values: any) => console.log(values)}
+        onSubmit={handleOnSubmitToLogin}
       >
         <Field
           component={AppFormField}
@@ -54,7 +70,7 @@ const Login = ({ navigation }: any) => {
       </AppForm>
       <ButtonShared
         title="Regístrate"
-        onPress={() => navigation.navigate("Register")}
+        onPress={handleOnGoSubmit}
         isValid={true}
       />
     </View>

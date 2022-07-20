@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 const registerValidation = Yup.object().shape({
-    name: Yup.string().required("Name is required").label("Name"),
+    name: Yup.string().required("Se requiere un nombre").label("Name"),
     email: Yup.string()
         .email("Por favor ingrese un email válido")
         .required("Se requiere un email")
