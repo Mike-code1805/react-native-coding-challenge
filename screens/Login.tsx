@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { Field } from "formik";
 import AppForm from "./components/form/AppForm";
 import AppFormField from "./components/form/AppFormField";
@@ -7,10 +7,24 @@ import AppFormSubmitButton from "./components/form/AppFormSubmitButton";
 import loginValidation from "./validator/loginValidation";
 import ButtonShared from "./components/button/ButtonShared";
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "flex-start",
+    paddingTop: 60,
+    padding: 10,
+  },
+  text:{
+    textDecorationLine: "underline",
+    fontWeight: "bold",
+    fontFamily: "monospace",
+    fontSize: 20,
+  }
+});
 const Login = ({ navigation }: any) => {
   return (
-    <>
-      <Text>Login</Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>Login:</Text>
       <AppForm
         initialValues={{
           name: "",
@@ -32,40 +46,19 @@ const Login = ({ navigation }: any) => {
         <Field
           component={AppFormField}
           name="password"
-          placeholder="Password"
+          placeholder="Contraseña"
           secureTextEntry
           textContentType="password"
         />
         <AppFormSubmitButton title="Ingresar" />
       </AppForm>
       <ButtonShared
-        title="Go to Register"
+        title="Regístrate"
         onPress={() => navigation.navigate("Register")}
         isValid={true}
       />
-    </>
+    </View>
   );
 };
 
 export default Login;
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     padding: 20,
-//   },
-//   input: {
-//     borderWidth: 1,
-//     borderColor: '#ddd',
-//     padding: 10,
-//     fontSize: 18,
-//     borderRadius: 6,
-//   },
-//   errorText: {
-//     color: 'crimson',
-//     fontWeight: 'bold',
-//     marginBottom: 10,
-//     marginTop: 6,
-//     textAlign: 'center',
-//   },
-
-// });

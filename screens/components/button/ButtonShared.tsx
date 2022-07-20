@@ -13,14 +13,20 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     elevation: 3,
     backgroundColor: "black",
+    width: "65%",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   text: {
+    display: "flex",
     fontSize: 16,
-    lineHeight: 21,
     fontWeight: "bold",
-    letterSpacing: 0.25,
     fontFamily: "monospace",
     color: "white",
+    marginLeft: "auto",
+    marginRight: "auto",
+    alignItems: "center",
+    alignSelf: "center",
   },
 });
 
@@ -33,7 +39,16 @@ interface AppButtonProps {
 const ButtonShared = ({ title, onPress, isValid }: AppButtonProps) => {
   return (
     <View style={styles.container}>
-      <Pressable style={styles.button} onPress={onPress} disabled={!isValid}>
+      <Pressable
+        style={({ pressed }) => [
+          {
+            opacity: pressed ? 0.7 : 1,
+          },
+          styles.button,
+        ]}
+        onPress={onPress}
+        disabled={!isValid}
+      >
         <Text style={styles.text}>{title}</Text>
       </Pressable>
     </View>

@@ -14,7 +14,7 @@ const registerValidation = Yup.object().shape({
         .required("Se requiere una contraseña")
         .label("Password"),
     confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password")], "Passwords do not match")
+        .oneOf([Yup.ref("password")], "Las contraseñas deben coincidir")
         .required("Se requiere una confirmación de contraseña")
         .label("Confirm Password"),
 });

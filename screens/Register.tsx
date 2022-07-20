@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { Field } from "formik";
 import AppForm from "./components/form/AppForm";
 import AppFormField from "./components/form/AppFormField";
@@ -7,10 +7,25 @@ import AppFormSubmitButton from "./components/form/AppFormSubmitButton";
 import registerValidation from "./validator/registerValidation";
 import ButtonShared from "./components/button/ButtonShared";
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "flex-start",
+    paddingTop: 60,
+    padding: 10,
+  },
+  text:{
+    textDecorationLine: "underline",
+    fontWeight: "bold",
+    fontFamily: "monospace",
+    fontSize: 20,
+  }
+});
+
 const Register = ({ navigation }: any) => {
   return (
-    <>
-      <Text>Sign Up</Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>Registro:</Text>
       <AppForm
         initialValues={{
           name: "",
@@ -21,7 +36,7 @@ const Register = ({ navigation }: any) => {
         validationSchema={registerValidation}
         onSubmit={(values: any) => console.log(values)}
       >
-        <Field component={AppFormField} name="name" placeholder="Name" />
+        <Field component={AppFormField} name="name" placeholder="Nombre" />
         <Field
           component={AppFormField}
           name="email"
@@ -33,25 +48,25 @@ const Register = ({ navigation }: any) => {
         <Field
           component={AppFormField}
           name="password"
-          placeholder="Password"
+          placeholder="Contraseña"
           secureTextEntry
           textContentType="password"
         />
         <Field
           component={AppFormField}
           name="confirmPassword"
-          placeholder="Confirm Password"
+          placeholder="Confirmar Contraseña"
           secureTextEntry
           textContentType="password"
         />
-        <AppFormSubmitButton title="Registrase" />
+        <AppFormSubmitButton title="Registrar" />
       </AppForm>
       <ButtonShared
-        title="Go to Login"
+        title="Ir al Login"
         onPress={() => navigation.navigate("Login")}
         isValid={true}
       />
-    </>
+    </View>
   );
 };
 

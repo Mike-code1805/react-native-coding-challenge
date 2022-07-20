@@ -14,7 +14,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     borderRadius: 4,
     elevation: 3,
-    backgroundColor: "blue",
+    backgroundColor: "#83541E",
+    width: "65%",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   text: {
     fontSize: 16,
@@ -34,7 +37,16 @@ const AppFormSubmitButton = ({ title }: AppFormSubmitButtonProps) => {
   const { handleSubmit, isValid } = useFormikContext();
   return (
     <View style={styles.container}>
-      <Pressable style={styles.button}  onPress={handleSubmit} disabled={!isValid}>
+      <Pressable
+        style={({ pressed }) => [
+          {
+            opacity: pressed ? 0.7 : 1,
+          },
+          styles.button,
+        ]}
+        onPress={handleSubmit}
+        disabled={!isValid}
+      >
         <Text style={styles.text}>{title}</Text>
       </Pressable>
     </View>
